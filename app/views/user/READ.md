@@ -2,7 +2,6 @@ Huy {
 
 - Trang chủ
 - Sản phẩm
-- Mới nhất
 - Giới thiệu
 - Giỏ hàng
 - Tìm kiếm
