@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản lý Đơn hàng</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Màu nền nhẹ nhàng */
+            font-family: Arial, sans-serif; /* Phông chữ */
+        }
+
+        h2 {
+            margin-bottom: 30px;
+            color: #343a40; /* Màu tiêu đề */
+        }
+
+        /* Thêm kiểu dáng cho ô tìm kiếm */
+        #search {
+            border-radius: 25px;
+            padding: 10px 20px;
+            border: 1px solid #ced4da;
+            transition: border-color 0.3s;
+            width: 250px; /* Điều chỉnh chiều rộng của thanh tìm kiếm */
+        }
+
+        #search:focus {
+            border-color: #007bff; /* Màu viền khi ô tìm kiếm được chọn */
+            box-shadow: 0 0 5px rgba(0, 123, 255, .25);
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: space-between; /* Căn trái và phải */
+            align-items: center; /* Căn giữa theo chiều dọc */
+            margin-bottom: 20px;
+        }
+
+        .table {
+            background-color: white; /* Màu nền bảng */
+            border-radius: 10px; /* Bo góc bảng */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng cho bảng */
+        }
+
+        .table th, .table td {
+            vertical-align: middle;
+        }
+
+        .modal-header {
+            background-color: #007bff; /* Màu nền modal */
+            color: white;
+        }
+
+        .modal-footer .btn {
+            border-radius: 20px;
+        }
+
+        .btn-success, .btn-info, .btn-danger {
+            border-radius: 20px;
+        }
+
+        .container {
+            margin-top: 30px;
+        }
+
+        /* Cải thiện kiểu dáng cho các nút */
+        .btn {
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px); /* Hiệu ứng nhấc nút khi hover */
+        }
+
+        .btn-success:hover {
+            background-color: #28a745; /* Màu nền khi hover */
+        }
+
+        .btn-info:hover {
+            background-color: #17a2b8; /* Màu nền khi hover */
+        }
+
+        .btn-danger:hover {
+            background-color: #dc3545; /* Màu nền khi hover */
+        }
+    </style>
+</head>
+<body>
+
+<div class="container mt-5">
+    <h2 class="text-center">Quản lý Đơn hàng</h2>
+
+    <!-- Tìm kiếm và Thêm đơn hàng -->
+    <div class="search-container">
+        <input type="text" id="search" class="form-control" placeholder="Tìm kiếm theo mã đơn hàng hoặc tên khách hàng" onkeyup="searchOrder()">
+        <button class="btn btn-success" onclick="toggleOrderForm()">Thêm đơn hàng</button>
+    </div>
+
+    <!-- Form Thêm Đơn Hàng -->
+    <form id="orderForm" style="display: none;" onsubmit="addOrder(event)">
+        <input type="hidden" id="editIndex">
+        <div class="mb-3">
+            <label for="customerName" class="form-label">Tên khách hàng</label>
+            <input type="text" class="form-control" id="customerName" required>
+        </div>
+        <div class="mb-3">
+            <label for="productName" class="form-label">Tên sản phẩm</label>
+            <input type="text" class="form-control" id="productName" required>
+        </div>
+        <div class="mb-3">
+            <label for="orderQuantity" class="form-label">Số lượng</label>
+            <input type="number" class="form-control" id="orderQuantity" required>
+        </div>
+        <div class="mb-3">
+            <label for="orderDate" class="form-label">Ngày đặt hàng</label>
+            <input type="date" class="form-control" id="orderDate" required>
+        </div>
+        <div class="mb-3">
+            <label for="orderStatus" class="form-label">Tình trạng</label>
+            <select class="form-control" id="orderStatus" required>
+                <option value="Đang chờ">Đang chờ</option>
+                <option value="Đã giao">Đã giao</option>
+                <option value="Đã hủy">Đã hủy</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="totalValue" class="form-label">Tổng giá trị</label>
+            <input type="text" class="form-control" id="totalValue" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Lưu đơn hàng</button>
+        <button type="button" class="btn btn-secondary" onclick="cancelOrderForm()">Hủy</button>
+    </form>
+
+    <!-- Bảng danh sách đơn hàng -->
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Mã đơn hàng</th>
+                <th>Tên khách hàng</th>
+                <th>Tên sản phẩm</th>
+                <th>Số lượng đặt</th>
+                <th>Ngày đặt hàng</th>
+                <th>Tình trạng</th>
+                <th>Tổng giá trị</th>
+                <th>Hành động</th>
+            </tr>
+        </thead>
+        <tbody id="orderList">
+            <!-- Dữ liệu đơn hàng sẽ được thêm vào đây -->
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal Xem Đơn Hàng -->
+<div class="modal fade" id="viewOrderModal" tabindex="-1" role="dialog" aria-labelledby="viewOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="viewOrderModalLabel">Chi tiết Đơn hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="orderDetails"></div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Xác Nhận Hủy Đơn Hàng -->
+<div class="modal fade" id="cancelOrderModal" tabindex="-1" role="dialog" aria-labelledby="cancelOrderModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="cancelOrderModalLabel">Xác nhận hủy đơn hàng</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Bạn có chắc chắn muốn hủy đơn hàng này không?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Hủy</button>
+                <button type="button" class="btn btn-danger" id="confirmCancelBtn">Hủy đơn</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    let orders = JSON.parse(localStorage.getItem('orders')) || []; // Lấy dữ liệu từ localStorage
+    let cancelIndex = -1;
+
+    function renderOrders() {
+        const orderList = document.getElementById('orderList');
+        orderList.innerHTML = ''; // Xóa nội dung cũ
+
+        orders.forEach((order, index) => {
+            orderList.innerHTML += `
+                <tr>
+                    <td>${order.id}</td>
+                    <td>${order.customer}</td>
+                    <td>${order.product}</td>
+                    <td>${order.quantity}</td>
+                    <td>${order.date}</td>
+                    <td><span class="badge badge-warning">${order.status}</span></td>
+                    <td>${order.total}</td>
+                    <td>
+                        <button class="btn btn-info btn-sm" onclick="viewOrder(${index})">Xem</button>
+                        <button class="btn btn-danger btn-sm" onclick="confirmCancel(${index})">Hủy</button>
+                    </td>
+                </tr>
+            `;
+        });
+    }
+
+    function viewOrder(index) {
+        const order = orders[index];
+        const orderDetails = document.getElementById('orderDetails');
+        orderDetails.innerHTML = `
+            <p><strong>Mã đơn hàng:</strong> ${order.id}</p>
+            <p><strong>Tên khách hàng:</strong> ${order.customer}</p>
+            <p><strong>Tên sản phẩm:</strong> ${order.product}</p>
+            <p><strong>Số lượng:</strong> ${order.quantity}</p>
+            <p><strong>Ngày đặt hàng:</strong> ${order.date}</p>
+            <p><strong>Tình trạng:</strong> ${order.status}</p>
+            <p><strong>Tổng giá trị:</strong> ${order.total}</p>
+        `;
+        $('#viewOrderModal').modal('show');
+    }
+
+    function confirmCancel(index) {
+        cancelIndex = index;
+        $('#cancelOrderModal').modal('show');
+    }
+
+    document.getElementById('confirmCancelBtn').addEventListener('click', function() {
+        if (cancelIndex !== -1) {
+            orders.splice(cancelIndex, 1);
+            localStorage.setItem('orders', JSON.stringify(orders)); // Cập nhật localStorage
+            renderOrders();
+            cancelIndex = -1; // Reset lại chỉ số
+        }
+        $('#cancelOrderModal').modal('hide');
+    });
+
+    function toggleOrderForm() {
+        const form = document.getElementById('orderForm');
+        form.style.display = form.style.display === 'none' ? 'block' : 'none';
+    }
+
+    function cancelOrderForm() {
+        document.getElementById('orderForm').reset();
+        document.getElementById('orderForm').style.display = 'none';
+    }
+
+    function addOrder(event) {
+        event.preventDefault();
+        
+        const customerName = document.getElementById('customerName').value;
+        const productName = document.getElementById('productName').value;
+        const quantity = document.getElementById('orderQuantity').value;
+        const orderDate = document.getElementById('orderDate').value;
+        const orderStatus = document.getElementById('orderStatus').value;
+        const totalValue = document.getElementById('totalValue').value;
+
+        const newOrder = {
+            id: `#00${orders.length + 1}`, // Tạo mã đơn hàng tự động
+            customer: customerName,
+            product: productName,
+            quantity: quantity,
+            date: orderDate,
+            status: orderStatus,
+            total: totalValue
+        };
+
+        orders.push(newOrder);
+        localStorage.setItem('orders', JSON.stringify(orders)); // Lưu vào localStorage
+        renderOrders();
+        cancelOrderForm();
+    }
+
+    function searchOrder() {
+        const searchValue = document.getElementById('search').value.toLowerCase();
+        const filteredOrders = orders.filter(order => 
+            order.id.toLowerCase().includes(searchValue) ||
+            order.customer.toLowerCase().includes(searchValue)
+        );
+
+        const orderList = document.getElementById('orderList');
+        orderList.innerHTML = ''; // Xóa nội dung cũ
+
+        filteredOrders.forEach((order, index) => {
+            orderList.innerHTML += `
+                <tr>
+                    <td>${order.id}</td>
+                    <td>${order.customer}</td>
+                    <td>${order.product}</td>
+                    <td>${order.quantity}</td>
+                    <td>${order.date}</td>
+                    <td><span class="badge badge-warning">${order.status}</span></td>
+                    <td>${order.total}</td>
+                    <td>
+                        <button class="btn btn-info btn-sm" onclick="viewOrder(${index})">Xem</button>
+                        <button class="btn btn-danger btn-sm" onclick="confirmCancel(${index})">Hủy</button>
+                    </td>
+                </tr>
+            `;
+        });
+
+        // Hiển thị thông báo nếu không có kết quả
+        if (filteredOrders.length === 0) {
+            orderList.innerHTML = '<tr><td colspan="8" class="text-center">Không tìm thấy đơn hàng nào.</td></tr>';
+        }
+    }
+
+    // Khởi động trang
+    document.addEventListener('DOMContentLoaded', renderOrders);
+</script>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
