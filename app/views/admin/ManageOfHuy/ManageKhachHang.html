@@ -7,44 +7,39 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa; /* Màu nền nhẹ nhàng */
-            font-family: Arial, sans-serif; /* Phông chữ */
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
         }
 
         h2 {
             margin-bottom: 30px;
-            color: #343a40; /* Màu tiêu đề */
+            color: #343a40;
         }
 
-        /* Thêm kiểu dáng cho ô tìm kiếm */
         #search {
             border-radius: 25px;
             padding: 10px 20px;
             border: 1px solid #ced4da;
             transition: border-color 0.3s;
-            width: 250px; /* Điều chỉnh chiều rộng của thanh tìm kiếm */
+            width: 250px;
         }
 
         #search:focus {
-            border-color: #007bff; /* Màu viền khi ô tìm kiếm được chọn */
+            border-color: #007bff;
             box-shadow: 0 0 5px rgba(0, 123, 255, .25);
         }
 
         .search-container {
             display: flex;
-            justify-content: space-between; /* Căn trái và phải */
-            align-items: center; /* Căn giữa theo chiều dọc */
+            justify-content: space-between;
+            align-items: center;
             margin-bottom: 20px;
         }
 
-        .search-container .form-control {
-            margin-right: 20px; /* Khoảng cách giữa ô tìm kiếm và nút */
-        }
-
         .table {
-            background-color: white; /* Màu nền bảng */
-            border-radius: 10px; /* Bo góc bảng */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng cho bảng */
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
 
         .table th, .table td {
@@ -52,7 +47,7 @@
         }
 
         .modal-header {
-            background-color: #007bff; /* Màu nền modal */
+            background-color: #007bff;
             color: white;
         }
 
@@ -68,31 +63,33 @@
             margin-top: 30px;
         }
 
-        /* Cải thiện kiểu dáng cho các nút */
         .btn {
             transition: background-color 0.3s, transform 0.2s;
         }
 
         .btn:hover {
-            transform: translateY(-2px); /* Hiệu ứng nhấc nút khi hover */
+            transform: translateY(-2px);
         }
 
         .btn-success:hover {
-            background-color: #28a745; /* Màu nền khi hover */
+            background-color: #28a745;
         }
 
         .btn-info:hover {
-            background-color: #17a2b8; /* Màu nền khi hover */
+            background-color: #17a2b8;
         }
 
         .btn-danger:hover {
-            background-color: #dc3545; /* Màu nền khi hover */
+            background-color: #dc3545;
         }
     </style>
 </head>
 <body>
 
 <div class="container mt-5">
+    <!-- Thêm nút quay về Trang Chủ Admin -->
+    <a href="admin_dashboard.html" class="btn btn-primary mb-3">🏠 Quay về Trang Chủ Admin</a>
+
     <h2 class="text-center">Quản lý Khách hàng</h2>
 
     <!-- Tìm kiếm và Thêm khách hàng -->
@@ -137,7 +134,6 @@
             </tr>
         </thead>
         <tbody id="customerList">
-            <!-- Dữ liệu khách hàng sẽ được thêm vào đây -->
         </tbody>
     </table>
 
@@ -186,12 +182,12 @@
 </div>
 
 <script>
-    let customers = JSON.parse(localStorage.getItem('customers')) || []; // Lấy dữ liệu từ localStorage
+    let customers = JSON.parse(localStorage.getItem('customers')) || [];
     let deleteIndex = -1;
 
     function renderCustomers() {
         const customerList = document.getElementById('customerList');
-        customerList.innerHTML = ''; // Xóa nội dung cũ
+        customerList.innerHTML = '';
 
         customers.forEach((customer, index) => {
             customerList.innerHTML += `
@@ -210,7 +206,6 @@
             `;
         });
 
-        // Hiển thị thông báo nếu không có khách hàng
         document.getElementById('noResults').style.display = customers.length === 0 ? 'block' : 'none';
     }
 
@@ -253,12 +248,12 @@
         };
 
         if (index) {
-            customers[index] = newCustomer; // Cập nhật thông tin khách hàng
+            customers[index] = newCustomer;
         } else {
-            customers.push(newCustomer); // Thêm khách hàng mới
+            customers.push(newCustomer);
         }
 
-        localStorage.setItem('customers', JSON.stringify(customers)); // Lưu vào localStorage
+        localStorage.setItem('customers', JSON.stringify(customers));
         renderCustomers();
         cancelCustomerForm();
     }
@@ -271,9 +266,9 @@
     document.getElementById('confirmDeleteBtn').addEventListener('click', function() {
         if (deleteIndex !== -1) {
             customers.splice(deleteIndex, 1);
-            localStorage.setItem('customers', JSON.stringify(customers)); // Cập nhật localStorage
+            localStorage.setItem('customers', JSON.stringify(customers));
             renderCustomers();
-            deleteIndex = -1; // Reset lại chỉ số
+            deleteIndex = -1;
         }
         $('#cancelCustomerModal').modal('hide');
     });
@@ -286,7 +281,7 @@
     function cancelCustomerForm() {
         document.getElementById('customerForm').reset();
         document.getElementById('customerForm').style.display = 'none';
-        document.getElementById('editCustomerIndex').value = ''; // Reset chỉ số chỉnh sửa
+        document.getElementById('editCustomerIndex').value = '';
     }
 
     function searchCustomer() {
@@ -299,7 +294,7 @@
         );
 
         const customerList = document.getElementById('customerList');
-        customerList.innerHTML = ''; // Xóa nội dung cũ
+        customerList.innerHTML = '';
 
         filteredCustomers.forEach((customer, index) => {
             customerList.innerHTML += `
@@ -318,11 +313,9 @@
             `;
         });
 
-        // Hiển thị thông báo nếu không có kết quả
         document.getElementById('noResults').style.display = filteredCustomers.length === 0 ? 'block' : 'none';
     }
 
-    // Khởi động trang
     document.addEventListener('DOMContentLoaded', renderCustomers);
 </script>
 

@@ -7,97 +7,53 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
         body {
-            background-color: #f8f9fa; /* Màu nền nhẹ nhàng */
-            font-family: Arial, sans-serif; /* Phông chữ */
+            background-color: #f8f9fa;
+            font-family: Arial, sans-serif;
         }
-
         h2 {
-            margin-bottom: 30px;
-            color: #343a40; /* Màu tiêu đề */
+            margin-bottom: 20px;
+            color: #343a40;
         }
-
-        /* Thêm kiểu dáng cho ô tìm kiếm */
         #search {
             border-radius: 25px;
             padding: 10px 20px;
-            border: 1px solid #ced4da;
-            transition: border-color 0.3s;
-            width: 250px; /* Điều chỉnh chiều rộng của thanh tìm kiếm */
+            width: 250px;
         }
-
-        #search:focus {
-            border-color: #007bff; /* Màu viền khi ô tìm kiếm được chọn */
-            box-shadow: 0 0 5px rgba(0, 123, 255, .25);
-        }
-
-        .search-container {
-            display: flex;
-            justify-content: space-between; /* Căn trái và phải */
-            align-items: center; /* Căn giữa theo chiều dọc */
-            margin-bottom: 20px;
-        }
-
         .table {
-            background-color: white; /* Màu nền bảng */
-            border-radius: 10px; /* Bo góc bảng */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Đổ bóng cho bảng */
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-
-        .table th, .table td {
-            vertical-align: middle;
-        }
-
-        .modal-header {
-            background-color: #007bff; /* Màu nền modal */
-            color: white;
-        }
-
-        .modal-footer .btn {
+        .btn {
+            transition: transform 0.2s;
             border-radius: 20px;
         }
-
-        .btn-success, .btn-info, .btn-danger {
-            border-radius: 20px;
+        .btn:hover {
+            transform: translateY(-2px);
         }
-
         .container {
             margin-top: 30px;
         }
-
-        /* Cải thiện kiểu dáng cho các nút */
-        .btn {
-            transition: background-color 0.3s, transform 0.2s;
-        }
-
-        .btn:hover {
-            transform: translateY(-2px); /* Hiệu ứng nhấc nút khi hover */
-        }
-
-        .btn-success:hover {
-            background-color: #28a745; /* Màu nền khi hover */
-        }
-
-        .btn-info:hover {
-            background-color: #17a2b8; /* Màu nền khi hover */
-        }
-
-        .btn-danger:hover {
-            background-color: #dc3545; /* Màu nền khi hover */
+        .product-img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
 
-<div class="container mt-5">
+<div class="container mt-4">
+    <a href="admin_dashboard.html" class="btn btn-primary btn-home">🏠 Quay về Trang Chủ Admin</a>
+
     <h2 class="text-center">Quản lý Sản phẩm</h2>
 
-    <!-- Tìm kiếm và Thêm sản phẩm -->
-    <div class="search-container">
-        <input type="text" id="search" class="form-control" placeholder="Tìm kiếm theo tên sản phẩm..." onkeyup="searchProduct()">
-        <button class="btn btn-success" onclick="toggleForm()">Thêm sản phẩm</button>
+    <div class="search-container d-flex justify-content-between align-items-center mb-3">
+        <input type="text" id="search" class="form-control" placeholder="Tìm kiếm..." onkeyup="searchProduct()">
+        <button class="btn btn-success" onclick="toggleForm()">➕ Thêm sản phẩm</button>
     </div>
 
-    <!-- Form Thêm/Sửa Sản Phẩm -->
     <form id="productForm" style="display: none;" onsubmit="saveProduct(event)">
         <input type="hidden" id="editIndex">
         <div class="mb-3">
@@ -105,7 +61,7 @@
             <input type="text" class="form-control" id="productName" required>
         </div>
         <div class="mb-3">
-            <label for="productPrice" class="form-label">Giá sản phẩm</label>
+            <label for="productPrice" class="form-label">Giá</label>
             <input type="number" class="form-control" id="productPrice" required>
         </div>
         <div class="mb-3">
@@ -122,76 +78,54 @@
             </select>
         </div>
         <div class="mb-3">
-            <label for="productImage" class="form-label">Hình ảnh sản phẩm</label>
-            <input type="file" class="form-control" id="productImage" accept="image/*">
+            <label for="productImage" class="form-label">Hình ảnh</label>
+            <input type="file" class="form-control" id="productImage" accept="image/*" onchange="previewImage(event)">
+            <img id="imagePreview" src="" class="mt-2" style="max-width: 100px; display: none;">
         </div>
         <button type="submit" class="btn btn-primary">Lưu sản phẩm</button>
         <button type="button" class="btn btn-secondary" onclick="cancelEdit()">Hủy</button>
     </form>
 
-    <!-- Bảng danh sách sản phẩm -->
     <table class="table mt-4">
         <thead>
             <tr>
-                <th class="text-left">ID</th>
-                <th class="text-left">Hình ảnh</th>
-                <th class="text-center">Tên sản phẩm</th>
-                <th class="text-center">Giá</th>
-                <th class="text-center">Số lượng</th>
-                <th class="text-center">Danh mục</th>
-                <th class="text-center">Hành động</th>
+                <th>ID</th>
+                <th>Hình ảnh</th>
+                <th>Tên</th>
+                <th>Giá</th>
+                <th>Số lượng</th>
+                <th>Danh mục</th>
+                <th>Hành động</th>
             </tr>
         </thead>
         <tbody id="productList"></tbody>
     </table>
 </div>
 
-<!-- Modal Chi Tiết Sản Phẩm -->
-<div class="modal fade" id="productModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Chi tiết sản phẩm</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body" id="productModalBody"></div>
-        </div>
-    </div>
-</div>
-
-<!-- Modal Xác Nhận Xóa -->
-<div class="modal fade" id="deleteConfirmModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Xác nhận xóa</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-            </div>
-            <div class="modal-body">
-                Bạn có chắc chắn muốn xóa sản phẩm này không?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
-                <button type="button" class="btn btn-danger" id="confirmDeleteBtn">Xóa</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <script>
     let products = JSON.parse(localStorage.getItem("products")) || [];
-    let deleteIndex = -1;
 
     function toggleForm() {
         document.getElementById("productForm").style.display = "block";
         document.getElementById("editIndex").value = "";
         document.getElementById("productForm").reset();
+        document.getElementById("imagePreview").style.display = "none";
     }
 
     function cancelEdit() {
-        document.getElementById("productForm").reset();
-        document.getElementById("editIndex").value = "";
         document.getElementById("productForm").style.display = "none";
+        document.getElementById("productForm").reset();
+        document.getElementById("imagePreview").style.display = "none";
+    }
+
+    function previewImage(event) {
+        let reader = new FileReader();
+        reader.onload = function () {
+            let output = document.getElementById("imagePreview");
+            output.src = reader.result;
+            output.style.display = "block";
+        };
+        reader.readAsDataURL(event.target.files[0]);
     }
 
     function saveProduct(event) {
@@ -199,46 +133,21 @@
         let index = document.getElementById("editIndex").value;
         let name = document.getElementById("productName").value;
         let price = document.getElementById("productPrice").value;
-        let quantity = document.getElementById("productQuantity").value; // Lấy số lượng
+        let quantity = document.getElementById("productQuantity").value;
         let category = document.getElementById("productCategory").value;
-        let imageInput = document.getElementById("productImage");
-        let imageSrc = index !== "" ? products[index].image : "";
+        let image = document.getElementById("imagePreview").src;
 
-        if (imageInput.files.length > 0) {
-            let reader = new FileReader();
-            reader.onload = function (e) {
-                imageSrc = e.target.result;
-                saveData(index, name, price, quantity, category, imageSrc); // Cập nhật hàm saveData
-            };
-            reader.readAsDataURL(imageInput.files[0]);
-        } else {
-            saveData(index, name, price, quantity, category, imageSrc); // Cập nhật hàm saveData
-        }
-    }
+        let product = { name, price, quantity, category, image };
 
-    function saveData(index, name, price, quantity, category, imageSrc) { // Cập nhật tham số
-        let product = { name, price, quantity, category, image: imageSrc }; // Cập nhật đối tượng sản phẩm
         if (index === "") {
             products.push(product);
         } else {
             products[index] = product;
         }
+
         localStorage.setItem("products", JSON.stringify(products));
         cancelEdit();
         renderProducts();
-    }
-
-    function viewProduct(index) {
-        let product = products[index];
-        let modalBody = document.getElementById("productModalBody");
-        modalBody.innerHTML = `
-            <p><strong>Tên:</strong> ${product.name}</p>
-            <p><strong>Giá:</strong> ${product.price} VND</p>
-            <p><strong>Số lượng:</strong> ${product.quantity}</p> <!-- Hiển thị số lượng -->
-            <p><strong>Danh mục:</strong> ${product.category}</p>
-            <img src="${product.image}" alt="Hình ảnh" class="img-fluid">
-        `;
-        new bootstrap.Modal(document.getElementById("productModal")).show();
     }
 
     function editProduct(index) {
@@ -246,79 +155,59 @@
         document.getElementById("editIndex").value = index;
         document.getElementById("productName").value = product.name;
         document.getElementById("productPrice").value = product.price;
-        document.getElementById("productQuantity").value = product.quantity; // Cập nhật số lượng
+        document.getElementById("productQuantity").value = product.quantity;
         document.getElementById("productCategory").value = product.category;
+        document.getElementById("imagePreview").src = product.image;
+        document.getElementById("imagePreview").style.display = "block";
         document.getElementById("productForm").style.display = "block";
     }
 
-    function confirmDelete(index) {
-        deleteIndex = index;
-        new bootstrap.Modal(document.getElementById("deleteConfirmModal")).show();
-    }
-
-    document.getElementById("confirmDeleteBtn").addEventListener("click", function () {
-        if (deleteIndex !== -1) {
-            products.splice(deleteIndex, 1);
+    function deleteProduct(index) {
+        if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
+            products.splice(index, 1);
             localStorage.setItem("products", JSON.stringify(products));
             renderProducts();
         }
-        bootstrap.Modal.getInstance(document.getElementById("deleteConfirmModal")).hide();
-    });
+    }
 
     function searchProduct() {
         const searchValue = document.getElementById("search").value.toLowerCase();
-        const filteredProducts = products.filter(product => 
+        const filteredProducts = products.filter(product =>
             product.name.toLowerCase().includes(searchValue) ||
             product.category.toLowerCase().includes(searchValue)
         );
-
-        const productList = document.getElementById("productList");
-        productList.innerHTML = ""; // Xóa nội dung cũ
-
-        filteredProducts.forEach((product, index) => {
-            let imageSrc = product.image ? product.image : "https://via.placeholder.com/50";
-            productList.innerHTML += `
-                <tr>
-                    <td class="text-left">${index + 1}</td>
-                    <td class="text-left"><img src="${imageSrc}" width="50" class="img-fluid"></td>
-                    <td class="text-center">${product.name}</td>
-                    <td class="text-center">${product.price} VND</td>
-                    <td class="text-center">${product.quantity}</td> <!-- Hiển thị số lượng -->
-                    <td class="text-center">${product.category}</td> <!-- Hiển thị danh mục -->
-                    <td class="text-center">
-                        <button class="btn btn-info btn-sm" onclick="viewProduct(${index})">Xem</button>
-                        <button class="btn btn-warning btn-sm" onclick="editProduct(${index})">Sửa</button>
-                        <button class="btn btn-danger btn-sm" onclick="confirmDelete(${index})">Xóa</button>
-                    </td>
-                </tr>`;
-        });
+        renderProducts(filteredProducts);
     }
 
-    function renderProducts() {
+    function renderProducts(filteredList = null) {
         let productList = document.getElementById("productList");
         productList.innerHTML = "";
-        products.forEach((product, index) => {
-            let imageSrc = product.image ? product.image : "https://via.placeholder.com/50";
+        let list = filteredList || products;
+
+        list.forEach((product, index) => {
             productList.innerHTML += `
                 <tr>
-                    <td class="text-left">${index + 1}</td>
-                    <td class="text-left"><img src="${imageSrc}" width="50" class="img-fluid"></td>
-                    <td class="text-center">${product.name}</td>
-                    <td class="text-center">${product.price} VND</td>
-                    <td class="text-center">${product.quantity}</td> <!-- Hiển thị số lượng -->
-                    <td class="text-center">${product.category}</td> <!-- Hiển thị danh mục -->
-                    <td class="text-center">
-                        <button class="btn btn-info btn-sm" onclick="viewProduct(${index})">Xem</button>
-                        <button class="btn btn-warning btn-sm" onclick="editProduct(${index})">Sửa</button>
-                        <button class="btn btn-danger btn-sm" onclick="confirmDelete(${index})">Xóa</button>
+                    <td>${index + 1}</td>
+                    <td><img src="${product.image}" class="product-img"></td>
+                    <td>${product.name}</td>
+                    <td>${product.price} VND</td>
+                    <td>${product.quantity}</td>
+                    <td>${product.category}</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" onclick="editProduct(${index})">✏️ Sửa</button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteProduct(${index})">🗑️ Xóa</button>
                     </td>
                 </tr>`;
         });
+
+        localStorage.setItem("products", JSON.stringify(list)); // Đảm bảo dữ liệu luôn được lưu lại
     }
 
-    document.addEventListener("DOMContentLoaded", renderProducts);
+    document.addEventListener("DOMContentLoaded", () => {
+        products = JSON.parse(localStorage.getItem("products")) || [];
+        renderProducts();
+    });
 </script>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

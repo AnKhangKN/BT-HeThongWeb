@@ -89,6 +89,9 @@
 <body>
 
 <div class="container mt-5">
+    <!-- Nút Quay về trang chủ -->
+    <a href="admin_dashboard.html" class="btn btn-primary mb-3">🏠Quay về trang chủ</a>
+
     <h2 class="text-center">Quản lý Đơn hàng</h2>
 
     <!-- Tìm kiếm và Thêm đơn hàng -->
@@ -221,7 +224,7 @@
     function viewOrder(index) {
         const order = orders[index];
         const orderDetails = document.getElementById('orderDetails');
-        orderDetails.innerHTML = `
+        orderDetails.innerHTML = ` 
             <p><strong>Mã đơn hàng:</strong> ${order.id}</p>
             <p><strong>Tên khách hàng:</strong> ${order.customer}</p>
             <p><strong>Tên sản phẩm:</strong> ${order.product}</p>
