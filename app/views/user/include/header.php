@@ -76,10 +76,18 @@
 
                     <div class="d-flex justify-content-center m-auto align-items-center w-50 "
                         style="font-weight: 500;">
-                        <div class="d-flex w-25 justify-content-center" style="line-height: 44px;">Trang chủ</div>
-                        <div class="d-flex w-25 justify-content-center" style="line-height: 44px;">Sản phẩm</div>
-                        <div class="d-flex w-25 justify-content-center" style="line-height: 44px;">Bảo Hành</div>
-                        <div class="d-flex w-25 justify-content-center" style="line-height: 44px;">Giới thiệu</div>
+                        <div class="d-flex w-25 justify-content-center" style="line-height: 44px;">
+                            <a href="index.php?page=home">Trang chủ</a>
+                        </div>
+                        <div class="d-flex w-25 justify-content-center" style="line-height: 44px;">
+                            <a href="index.php?page=product">Sản phẩm</a>
+                        </div>
+                        <div class="d-flex w-25 justify-content-center" style="line-height: 44px;">
+                            <a href="index.php?page=warranty">Bảo Hành</a>
+                        </div>
+                        <div class="d-flex w-25 justify-content-center" style="line-height: 44px;">
+                            <a href="index.php?page=introduction">Giới thiệu</a>
+                        </div>
                     </div>
 
                 </div>

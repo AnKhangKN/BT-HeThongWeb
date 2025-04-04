@@ -16,12 +16,12 @@ if (isset($_GET['page'])) {
     $page = 'home'; 
 }
 
-// Kiểm tra xem tệp trang có tồn tại không và bao gồm nó
-$pageFile = '../app/views/user/' . $page . '.php'; // Đảm bảo sử dụng đường dẫn chính xác
+$pageFile = '../app/views/user/' . $page . '.php';
+
 if (file_exists($pageFile)) {
     include_once $pageFile;
 } else {
-    echo "<p>Trang bạn yêu cầu không tồn tại.</p>"; // Thông báo lỗi nếu tệp không tồn tại
+    echo "<p>Trang bạn yêu cầu không tồn tại.</p>";
 }
 
 // Bao gồm footer

@@ -5,7 +5,7 @@ function connectBD(){
     $server = "localhost";
     $user = "root";
     $pass = "";
-    $dbname = "bt_htw"; //tên cơ sở dữ liệu
+    $dbname = "bt_htw"; 
 
     $conn = mysqli_connect($server, $user, $pass, $dbname);
 
