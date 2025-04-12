@@ -1,0 +1,3 @@
+<main>
+    trang cart
+</main>
