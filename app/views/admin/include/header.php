@@ -4,13 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin UNIE</title>
-    <link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap-5.2.3-dist/boostrap-grid.min.css">
+    <link rel="stylesheet" href="../../vendor/bootstrap-5.2.3-dist/css/bootstrap.min.css">
     <link
       rel="stylesheet"
       href="../../vendor/fontawesome-free-6.7.2-web/css/all.css"
     />
     
     <link rel="stylesheet" href="../../app/views/admin/include/TrangChuAdmin.css" />
+    <link rel="stylesheet" href="../../app/views/admin/assets/Hieu/ManageNhaCungCap.css">
     <link rel="stylesheet" href="../../app/views/admin/assets/Huy/ManageSanPham.css" />
   </head>
   <body id="bodyId">
@@ -46,7 +47,7 @@
                 <span class="nav__text">Khách hàng</span>
               </a>
   
-              <a href="#" class="nav__link">
+              <a href="index.php?page=QuanLyNhaCungCap" class="nav__link">
               <i class="fa-solid fa-building nav__icon"></i>
                 <span class="nav__text">Nhà cung cấp</span>
               </a>
