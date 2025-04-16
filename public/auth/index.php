@@ -1,7 +1,7 @@
 <?php 
 
 // Bao gồm tệp cấu hình
-require_once '../config/database.php'; 
+require_once '../../config/database.php'; 
 
 // Kết nối cơ sở dữ liệu
 $conn = connectBD(); 
