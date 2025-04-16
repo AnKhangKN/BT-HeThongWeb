@@ -1,82 +1,100 @@
+const form = document.getElementById('productForm');
+const list = document.getElementById('productTable');
+const searchInput = document.getElementById('searchInput');
+
+const nameInput = document.getElementById('productName');
+const priceInput = document.getElementById('productPrice');
+const categoryInput = document.getElementById('productCategory');
+const imageInput = document.getElementById('productImageFile');
+
 let products = JSON.parse(localStorage.getItem('products')) || [];
+let editIndex = null;
 
-function renderProducts() {
-  const table = document.getElementById("productTable");
-  table.innerHTML = "";
-
-  products.forEach((product, index) => {
-    table.innerHTML += `
+function renderProducts(data) {
+  list.innerHTML = '';
+  data.forEach((p, index) => {
+    list.innerHTML += `
       <tr>
         <td>${index + 1}</td>
-        <td><img src="${product.image}" width="60"></td>
-        <td>${product.name}</td>
-        <td>${product.price.toLocaleString()}₫</td>
-        <td>${product.category}</td>
+        <td><img src="${p.image}" class="thumb"></td>
+        <td>${p.name}</td>
+        <td>${p.price.toLocaleString()} ₫</td>
+        <td>${p.category}</td>
         <td class="text-center">
-          <button class="btn btn-warning btn-sm me-1" onclick="editProduct(${index})"><i class="bi bi-pencil-square"></i></button>
-          <button class="btn btn-danger btn-sm" onclick="deleteProduct(${index})"><i class="bi bi-trash"></i></button>
+          <button class="btn btn-sm btn-primary me-2" onclick="editProduct(${index})">Sửa</button>
+          <button class="btn btn-sm btn-danger" onclick="deleteProduct(${index})">Xoá</button>
         </td>
       </tr>
     `;
   });
 }
 
-document.getElementById("productForm").addEventListener("submit", function (e) {
-  e.preventDefault();
-
-  const newProduct = {
-    name: document.getElementById("productName").value,
-    price: parseFloat(document.getElementById("productPrice").value),
-    category: document.getElementById("productCategory").value,
-    image: document.getElementById("productImage").value,
-  };
-
-  products.push(newProduct);
-  localStorage.setItem("products", JSON.stringify(products));
-  renderProducts();
-  e.target.reset();
-  bootstrap.Modal.getInstance(document.getElementById("addProductModal")).hide();
-});
-
-function deleteProduct(index) {
-  if (confirm("Bạn có chắc muốn xóa sản phẩm này?")) {
-    products.splice(index, 1);
-    localStorage.setItem("products", JSON.stringify(products));
-    renderProducts();
-  }
+function saveToLocalStorage() {
+  localStorage.setItem('products', JSON.stringify(products));
 }
 
+form.addEventListener('submit', function (e) {
+  e.preventDefault();
+  const name = nameInput.value.trim();
+  const price = parseFloat(priceInput.value);
+  const category = categoryInput.value.trim();
+  const imageFile = imageInput.files[0];
+
+  if (!name || isNaN(price) || !category) return;
+
+  const handleSave = (imageUrl) => {
+    const newProduct = { name, price, category, image: imageUrl };
+
+    if (editIndex !== null) {
+      products[editIndex] = newProduct;
+      editIndex = null;
+    } else {
+      products.push(newProduct);
+    }
+
+    saveToLocalStorage();
+    renderProducts(products);
+    form.reset();
+    bootstrap.Modal.getInstance(document.getElementById('addProductModal')).hide();
+  };
+
+  if (imageFile) {
+    const reader = new FileReader();
+    reader.onload = function (event) {
+      handleSave(event.target.result);
+    };
+    reader.readAsDataURL(imageFile);
+  } else if (editIndex !== null) {
+    handleSave(products[editIndex].image);
+  }
+});
+
 function editProduct(index) {
-  const product = products[index];
-  document.getElementById("productName").value = product.name;
-  document.getElementById("productPrice").value = product.price;
-  document.getElementById("productCategory").value = product.category;
-  document.getElementById("productImage").value = product.image;
-  deleteProduct(index);
-  const modal = new bootstrap.Modal(document.getElementById("addProductModal"));
+  const p = products[index];
+  nameInput.value = p.name;
+  priceInput.value = p.price;
+  categoryInput.value = p.category;
+  imageInput.value = '';
+  editIndex = index;
+
+  const modal = new bootstrap.Modal(document.getElementById('addProductModal'));
   modal.show();
 }
 
-document.getElementById("searchInput").addEventListener("input", function (e) {
-  const keyword = e.target.value.toLowerCase();
+function deleteProduct(index) {
+  if (confirm('Bạn có chắc muốn xoá sản phẩm này?')) {
+    products.splice(index, 1);
+    saveToLocalStorage();
+    renderProducts(products);
+  }
+}
+
+searchInput.addEventListener('input', () => {
+  const keyword = searchInput.value.toLowerCase();
   const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
-  const table = document.getElementById("productTable");
-  table.innerHTML = "";
-  filtered.forEach((product, index) => {
-    table.innerHTML += `
-      <tr>
-        <td>${index + 1}</td>
-        <td><img src="${product.image}" width="60"></td>
-        <td>${product.name}</td>
-        <td>${product.price.toLocaleString()}₫</td>
-        <td>${product.category}</td>
-        <td class="text-center">
-          <button class="btn btn-warning btn-sm me-1" onclick="editProduct(${index})"><i class="bi bi-pencil-square"></i></button>
-          <button class="btn btn-danger btn-sm" onclick="deleteProduct(${index})"><i class="bi bi-trash"></i></button>
-        </td>
-      </tr>
-    `;
-  });
+  renderProducts(filtered);
 });
 
-renderProducts();
+document.addEventListener('DOMContentLoaded', () => {
+  renderProducts(products);
+});
