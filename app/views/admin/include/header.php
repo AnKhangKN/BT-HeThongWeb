@@ -4,12 +4,12 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin UNIE</title>
-    
+    <link rel="stylesheet" href="../../vendor/bootstrap/css/bootstrap-5.2.3-dist/boostrap-grid.min.css">
     <link
       rel="stylesheet"
       href="../../vendor/fontawesome-free-6.7.2-web/css/all.css"
     />
-
+    
     <link rel="stylesheet" href="../../app/views/admin/include/TrangChuAdmin.css" />
     <link rel="stylesheet" href="../../app/views/admin/assets/Huy/ManageSanPham.css" />
   </head>
