@@ -1,0 +1,22 @@
+body {
+    background-color: #f8f9fa;
+  }
+  .product-card {
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    background-color: #fff;
+  }
+  .modal-header {
+    background-color: #198754;
+    color: white;
+  }
+  .modal-title {
+    font-weight: bold;
+  }
+  table img {
+    border-radius: 8px;
+  }
+  .table td, .table th {
+    vertical-align: middle;
+  }
