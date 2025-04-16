@@ -124,7 +124,8 @@ a {
   padding: 0 10px;
 }
 
-.nav__link:hover {
+.nav__link:hover,
+.nav__icon:hover {
   background-color: var(--white-color);
   color: var(--main-color);
 }
