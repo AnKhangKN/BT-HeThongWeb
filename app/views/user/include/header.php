@@ -81,7 +81,7 @@
                             class="modalInformationDetail text-dark position-absolute d-flex">
                             <ul class="list-unstyled">
                                 <li>
-                                    <a style="text-decoration: none" class="text-dark" href="./signup">Đăng kí</a>
+                                    <a style="text-decoration: none" class="text-dark" href="">Đăng kí</a>
                                 </li>
                                 <li>
                                     <a style="text-decoration: none" class="text-dark" href="./login">Đăng nhập</a>
