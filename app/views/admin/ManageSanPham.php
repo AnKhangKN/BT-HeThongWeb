@@ -1,66 +1,64 @@
-<<<<<<< HEAD
 <main>
-<div class="container mt-4">
-        <h1 class="mb-4">Quản lý sản phẩm</h1>
-=======
+<div class="container py-4">
+  
 
-<div class="container py-5">
-  <div class="text-center mb-4">
-    <h2 class="fw-bold text-success">Quản lý sản phẩm</h2>
+  <h2 class="text-center mb-4">Quản lý Sản phẩm</h2>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <input type="text" id="search" class="form-control" placeholder="🔍 Tìm kiếm..." onkeyup="searchProduct()">
+    <button class="btn btn-success ms-3" onclick="toggleForm()">➕ Thêm sản phẩm</button>
   </div>
->>>>>>> bde3eb971af70c710636738fde4fef77ca0a5153
 
-        <!-- Tìm kiếm sản phẩm -->
-        <div class="mb-3">
-            <input type="text" id="searchInput" class="form-control" placeholder="Tìm kiếm sản phẩm...">
-        </div>
-
-        <!-- Nút thêm sản phẩm -->
-        <button class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#addProductModal">Thêm sản phẩm</button>
-
-        <!-- Bảng sản phẩm -->
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Tên sản phẩm</th>
-                    <th>Ảnh</th>
-                    <th>Giá</th>
-                    <th>Hành động</th>
-                </tr>
-            </thead>
-            <tbody id="productTable">
-                <!-- Sản phẩm sẽ được thêm ở đây -->
-            </tbody>
-        </table>
+  <form id="productForm" class="form-container" style="display: none;" onsubmit="saveProduct(event)">
+    <input type="hidden" id="editIndex">
+    <div class="row g-3">
+      <div class="col-md-6">
+        <label for="productName" class="form-label">Tên sản phẩm</label>
+        <input type="text" class="form-control" id="productName" required>
+      </div>
+      <div class="col-md-3">
+        <label for="productPrice" class="form-label">Giá</label>
+        <input type="number" class="form-control" id="productPrice" required>
+      </div>
+      <div class="col-md-3">
+        <label for="productQuantity" class="form-label">Số lượng</label>
+        <input type="number" class="form-control" id="productQuantity" required>
+      </div>
+      <div class="col-md-6">
+        <label for="productCategory" class="form-label">Danh mục</label>
+        <select class="form-select" id="productCategory" required>
+          <option value="">-- Chọn danh mục --</option>
+          <option value="Điện tử">Điện tử</option>
+          <option value="Thời trang">Thời trang</option>
+          <option value="Gia dụng">Gia dụng</option>
+          <option value="Khác">Khác</option>
+        </select>
+      </div>
+      <div class="col-md-6">
+        <label for="productImage" class="form-label">Hình ảnh</label>
+        <input type="file" class="form-control" id="productImage" accept="image/*" onchange="previewImage(event)">
+        <img id="imagePreview" src="" class="mt-2">
+      </div>
+      <div class="col-12 d-flex justify-content-end">
+        <button type="submit" class="btn btn-primary me-2">💾 Lưu sản phẩm</button>
+        <button type="button" class="btn btn-secondary" onclick="cancelEdit()">❌ Hủy</button>
+      </div>
     </div>
+  </form>
 
-    <!-- Modal Thêm Sản Phẩm -->
-    <div class="modal fade" id="addProductModal" tabindex="-1" aria-labelledby="addProductModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="addProductModalLabel">Thêm sản phẩm</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="addProductForm">
-                        <div class="mb-3">
-                            <label for="productName" class="form-label">Tên sản phẩm</label>
-                            <input type="text" class="form-control" id="productName" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productImage" class="form-label">Ảnh sản phẩm</label>
-                            <input type="file" class="form-control" id="productImage" accept="image/*" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="productPrice" class="form-label">Giá sản phẩm</label>
-                            <input type="number" class="form-control" id="productPrice" required>
-                        </div>
-                        <button type="submit" class="btn btn-primary">Lưu</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
+  <table class="table mt-4 table-hover text-center align-middle">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Hình ảnh</th>
+        <th>Tên</th>
+        <th>Giá (VND)</th>
+        <th>Số lượng</th>
+        <th>Danh mục</th>
+        <th>Hành động</th>
+      </tr>
+    </thead>
+    <tbody id="productList"></tbody>
+  </table>
+</div>
 </main>

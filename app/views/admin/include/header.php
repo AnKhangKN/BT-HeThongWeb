@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin UNIE</title>
-    <link rel="stylesheet" href="../../vendor/bootstrap-5.2.3-dist/css/boostrap.min.css">
+    <link rel="stylesheet" href="../../vendor/bootstrap-5.2.3-dist/css/bootstrap.min.css">
     <link
       rel="stylesheet"
       href="../../vendor/fontawesome-free-6.7.2-web/css/all.css"
@@ -31,7 +31,7 @@
               <i class="fa-solid fa-chevron-right icon-arrow"></i>
             </div>
             <ul class="nav__list">
-              <a href="#" class="nav__link">
+              <a href="index.php?page=ManageSanPham" class="nav__link">
               <i class="fa-solid fa-basket-shopping nav__icon"></i>
                 <span class="nav__text">Sản phẩm</span>
               </a>

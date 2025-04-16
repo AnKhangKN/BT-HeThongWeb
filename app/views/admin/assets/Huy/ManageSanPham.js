@@ -1,100 +1,102 @@
-const form = document.getElementById('productForm');
-const list = document.getElementById('productTable');
-const searchInput = document.getElementById('searchInput');
+let products = JSON.parse(localStorage.getItem("products")) || [];
 
-const nameInput = document.getElementById('productName');
-const priceInput = document.getElementById('productPrice');
-const categoryInput = document.getElementById('productCategory');
-const imageInput = document.getElementById('productImageFile');
+  function toggleForm() {
+    document.getElementById("productForm").style.display = "block";
+    document.getElementById("editIndex").value = "";
+    document.getElementById("productForm").querySelector("form").reset();
+    document.getElementById("imagePreview").style.display = "none";
+  }
 
-let products = JSON.parse(localStorage.getItem('products')) || [];
-let editIndex = null;
+  function cancelEdit() {
+    document.getElementById("productForm").style.display = "none";
+    document.getElementById("productForm").querySelector("form").reset();
+    document.getElementById("imagePreview").style.display = "none";
+  }
 
-function renderProducts(data) {
-  list.innerHTML = '';
-  data.forEach((p, index) => {
-    list.innerHTML += `
-      <tr>
-        <td>${index + 1}</td>
-        <td><img src="${p.image}" class="thumb"></td>
-        <td>${p.name}</td>
-        <td>${p.price.toLocaleString()} ₫</td>
-        <td>${p.category}</td>
-        <td class="text-center">
-          <button class="btn btn-sm btn-primary me-2" onclick="editProduct(${index})">Sửa</button>
-          <button class="btn btn-sm btn-danger" onclick="deleteProduct(${index})">Xoá</button>
-        </td>
-      </tr>
-    `;
-  });
-}
+  function previewImage(event) {
+    let reader = new FileReader();
+    reader.onload = function () {
+      let output = document.getElementById("imagePreview");
+      output.src = reader.result;
+      output.style.display = "block";
+    };
+    reader.readAsDataURL(event.target.files[0]);
+  }
 
-function saveToLocalStorage() {
-  localStorage.setItem('products', JSON.stringify(products));
-}
+  function saveProduct(event) {
+    event.preventDefault();
+    let index = document.getElementById("editIndex").value;
+    let name = document.getElementById("productName").value;
+    let price = document.getElementById("productPrice").value;
+    let quantity = document.getElementById("productQuantity").value;
+    let category = document.getElementById("productCategory").value;
+    let image = document.getElementById("imagePreview").src;
 
-form.addEventListener('submit', function (e) {
-  e.preventDefault();
-  const name = nameInput.value.trim();
-  const price = parseFloat(priceInput.value);
-  const category = categoryInput.value.trim();
-  const imageFile = imageInput.files[0];
+    let product = { name, price, quantity, category, image };
 
-  if (!name || isNaN(price) || !category) return;
-
-  const handleSave = (imageUrl) => {
-    const newProduct = { name, price, category, image: imageUrl };
-
-    if (editIndex !== null) {
-      products[editIndex] = newProduct;
-      editIndex = null;
+    if (index === "") {
+      products.push(product);
     } else {
-      products.push(newProduct);
+      products[index] = product;
     }
 
-    saveToLocalStorage();
-    renderProducts(products);
-    form.reset();
-    bootstrap.Modal.getInstance(document.getElementById('addProductModal')).hide();
-  };
-
-  if (imageFile) {
-    const reader = new FileReader();
-    reader.onload = function (event) {
-      handleSave(event.target.result);
-    };
-    reader.readAsDataURL(imageFile);
-  } else if (editIndex !== null) {
-    handleSave(products[editIndex].image);
+    localStorage.setItem("products", JSON.stringify(products));
+    cancelEdit();
+    renderProducts();
   }
-});
 
-function editProduct(index) {
-  const p = products[index];
-  nameInput.value = p.name;
-  priceInput.value = p.price;
-  categoryInput.value = p.category;
-  imageInput.value = '';
-  editIndex = index;
-
-  const modal = new bootstrap.Modal(document.getElementById('addProductModal'));
-  modal.show();
-}
-
-function deleteProduct(index) {
-  if (confirm('Bạn có chắc muốn xoá sản phẩm này?')) {
-    products.splice(index, 1);
-    saveToLocalStorage();
-    renderProducts(products);
+  function editProduct(index) {
+    let product = products[index];
+    document.getElementById("editIndex").value = index;
+    document.getElementById("productName").value = product.name;
+    document.getElementById("productPrice").value = product.price;
+    document.getElementById("productQuantity").value = product.quantity;
+    document.getElementById("productCategory").value = product.category;
+    document.getElementById("imagePreview").src = product.image;
+    document.getElementById("imagePreview").style.display = "block";
+    document.getElementById("productForm").style.display = "block";
   }
-}
 
-searchInput.addEventListener('input', () => {
-  const keyword = searchInput.value.toLowerCase();
-  const filtered = products.filter(p => p.name.toLowerCase().includes(keyword));
-  renderProducts(filtered);
-});
+  function deleteProduct(index) {
+    if (confirm("Bạn có chắc chắn muốn xóa sản phẩm này?")) {
+      products.splice(index, 1);
+      localStorage.setItem("products", JSON.stringify(products));
+      renderProducts();
+    }
+  }
 
-document.addEventListener('DOMContentLoaded', () => {
-  renderProducts(products);
-});
+  function searchProduct() {
+    const searchValue = document.getElementById("search").value.toLowerCase();
+    const filteredProducts = products.filter(product =>
+      product.name.toLowerCase().includes(searchValue) ||
+      product.category.toLowerCase().includes(searchValue)
+    );
+    renderProducts(filteredProducts);
+  }
+
+  function renderProducts(filteredList = null) {
+    let productList = document.getElementById("productList");
+    productList.innerHTML = "";
+    let list = filteredList || products;
+
+    list.forEach((product, index) => {
+      productList.innerHTML += `
+        <tr class="align-middle text-center">
+          <td>${index + 1}</td>
+          <td><img src="${product.image}" class="product-img"></td>
+          <td>${product.name}</td>
+          <td>${product.price} VND</td>
+          <td>${product.quantity}</td>
+          <td>${product.category}</td>
+          <td>
+            <button class="btn btn-warning btn-sm" onclick="editProduct(${index})">✏️ Sửa</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteProduct(${index})">🗑️ Xóa</button>
+          </td>
+        </tr>`;
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    products = JSON.parse(localStorage.getItem("products")) || [];
+    renderProducts();
+  });
