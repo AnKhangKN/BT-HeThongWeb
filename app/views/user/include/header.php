@@ -81,10 +81,12 @@
                             class="modalInformationDetail text-dark position-absolute d-flex">
                             <ul class="list-unstyled">
                                 <li>
-                                    <a style="text-decoration: none" class="text-dark" href="">Đăng kí</a>
+                                    <a style="text-decoration: none" class="text-dark"
+                                        href="/BT-HeThongWeb/public/auth/index.php?page=signup">Đăng kí</a>
                                 </li>
                                 <li>
-                                    <a style="text-decoration: none" class="text-dark" href="./login">Đăng nhập</a>
+                                    <a style="text-decoration: none" class="text-dark"
+                                        href="/BT-HeThongWeb/public/auth/index.php?page=login">Đăng nhập</a>
                                 </li>
                             </ul>
                         </div>

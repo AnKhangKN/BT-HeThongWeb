@@ -10,28 +10,24 @@
             <div class="col-md-8">
                 <div class="d-flex flex-wrap">
                     <div class="dropdown me-3 mb-3">
-                        <button class="btn btn-outline-dark dropdown-toggle" type="button" id="priceFilter"
-                            data-bs-toggle="dropdown">
-                            Lọc giá <i class="fas fa-angle-down ms-1"></i>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="priceFilter">
-                            <li><a class="dropdown-item" href="#">Tất cả</a></li>
-                            <li><a class="dropdown-item" href="#">Dưới 500K</a></li>
-                            <li><a class="dropdown-item" href="#">500K - 1 triệu</a></li>
-                            <li><a class="dropdown-item" href="#">Trên 1 triệu</a></li>
-                        </ul>
+
+
+                        <select class="form-select" style="max-width: 200px;">
+                            <option selected>Tất cả</option>
+                            <option>Dưới 500K</option>
+                            <option>500K - 1 triệu</option>
+                            <option>Trên 1 triệu</option>
+                        </select>
+
                     </div>
                     <div class="dropdown me-3 mb-3">
-                        <button class="btn btn-outline-dark dropdown-toggle" type="button" id="typeFilter"
-                            data-bs-toggle="dropdown">
-                            Loại <i class="fas fa-angle-down ms-1"></i>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="typeFilter">
-                            <li><a class="dropdown-item" href="#">Tất cả</a></li>
-                            <li><a class="dropdown-item" href="#">Máy làm sữa hạt</a></li>
-                            <li><a class="dropdown-item" href="#">Máy ép chậm</a></li>
-                            <li><a class="dropdown-item" href="#">Máy nhồi bột</a></li>
-                        </ul>
+
+                        <select class="form-select" style="max-width: 200px;">
+                            <option selected> Tất cả</option>
+                            <option>Máy làm sữa hạt</option>
+                            <option>Máy ép chậm</option>
+                            <option>Máy nhồi bột</option>
+                        </select>
                     </div>
                 </div>
             </div>
