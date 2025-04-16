@@ -14,6 +14,7 @@ if (isset($_GET['page'])) {
     $page = basename($_GET['page']);
 } else {
     $page = 'ManageSanpham'; 
+    
 }
 
 $pageFile = '../../app/views/admin/' . $page . '.php';
