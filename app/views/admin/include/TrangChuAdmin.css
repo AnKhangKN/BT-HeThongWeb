@@ -98,6 +98,10 @@ a {
   transition: 0.5s;
 }
 
+.nav__list {
+  padding: 0;
+}
+
 .nav__link {
   display: flex;
   align-items: center;
@@ -114,6 +118,10 @@ a {
   width: 24px;
   height: 24px;
   color: var(--white-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 10px;
 }
 
 .nav__link:hover {
