@@ -6,3 +6,56 @@
     box-shadow: 1px 1px 10px #bdbdbd;
     border-radius: 4px;
 }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.navbar-brand img {
+    width: 50px;
+    height: auto;
+}
+.hero-banner {
+    position: relative;
+    overflow: hidden;
+    height: 350px;
+}
+.hero-banner img {
+    width: 100%;
+    object-fit: cover;
+}
+.filter-dropdown {
+    cursor: pointer;
+}
+.product-card {
+    transition: transform 0.3s;
+    cursor: pointer;
+}
+.product-card:hover {
+    transform: translateY(-5px);
+}
+.product-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 1;
+}
+.product-img {
+    height: 250px;
+    object-fit: cover;
+}
+.nav-link {
+    font-weight: 500;
+}
+.language-selector {
+    display: flex;
+    align-items: center;
+    margin-left: 15px;
+}
+.language-btn {
+    background: none;
+    border: none;
+    font-weight: bold;
+    color: #212529;
+}
+.active-lang {
+    text-decoration: underline;
+}

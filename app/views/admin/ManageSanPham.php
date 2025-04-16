@@ -1,6 +1,14 @@
+<<<<<<< HEAD
 <main>
 <div class="container mt-4">
         <h1 class="mb-4">Quản lý sản phẩm</h1>
+=======
+
+<div class="container py-5">
+  <div class="text-center mb-4">
+    <h2 class="fw-bold text-success">Quản lý sản phẩm</h2>
+  </div>
+>>>>>>> bde3eb971af70c710636738fde4fef77ca0a5153
 
         <!-- Tìm kiếm sản phẩm -->
         <div class="mb-3">

@@ -10,6 +10,7 @@
       href="../../vendor/fontawesome-free-6.7.2-web/css/all.css"
     />
     <link rel="stylesheet" href="../../app/views/admin/include/TrangChuAdmin.css" />
+    <link rel="stylesheet" href="../../app/views/admin/assets/Hieu/ManageNhaCungCap.css">
     <link rel="stylesheet" href="../../app/views/admin/assets/Huy/ManageSanPham.css" />
   </head>
   <body id="bodyId">
@@ -31,34 +32,34 @@
             </div>
             <ul class="nav__list">
               <a href="#" class="nav__link">
-                <i class="fa-regular fa-rectangle-list nav__icon"></i>
-                <span class="nav__text">Home</span>
+              <i class="fa-solid fa-basket-shopping nav__icon"></i>
+                <span class="nav__text">Sản phẩm</span>
               </a>
   
               <a href="#" class="nav__link">
-                <i class="fa-solid fa-user nav__icon"></i>
-                <span class="nav__text">User</span>
+              <i class="fa-solid fa-boxes-stacked nav__icon"></i>
+                <span class="nav__text">Đơn hàng</span>
               </a>
   
               <a href="#" class="nav__link">
-                <i class="fa-solid fa-bell nav__icon"></i>
-                <span class="nav__text">Notification</span>
+              <i class="fa-solid fa-user nav__icon"></i>
+                <span class="nav__text">Khách hàng</span>
               </a>
   
-              <a href="#" class="nav__link">
-                <i class="fa-solid fa-heart nav__icon"></i>
-                <span class="nav__text">Favorites</span>
+              <a href="index.php?page=QuanLyNhaCungCap" class="nav__link">
+              <i class="fa-solid fa-building nav__icon"></i>
+                <span class="nav__text">Nhà cung cấp</span>
               </a>
-  
+
               <a href="#" class="nav__link">
-                <i class="fa-brands fa-rocketchat nav__icon"></i>
-                <span class="nav__text">Chat</span>
+              <i class="fa-solid fa-chart-pie nav__icon"></i>
+                <span class="nav__text">Thống kê</span>
               </a>
             </ul>
           </div>
           <a href="#" class="nav__link">
             <i class="fa-solid fa-arrow-right-from-bracket nav__icon"></i>
-            <span class="nav__text">Close</span>
+            <span class="nav__text">Đăng xuất</span>
           </a>
         </div>
       </div>
