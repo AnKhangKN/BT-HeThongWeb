@@ -34,7 +34,8 @@
             </div>
 
             <div style="text-align: center; margin-top: 20px;">
-                <p>Đã có tài khoản? <a href="./login.html" style="text-decoration: none; color: #ff5c39;">Đăng
+                <p>Đã có tài khoản? <a href="/BT-HeThongWeb/public/auth/index.php?page=login"
+                        style="text-decoration: none; color: #ff5c39;">Đăng
                         nhập</a>
                 </p>
             </div>
