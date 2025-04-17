@@ -38,7 +38,8 @@
 
             <!-- Signup Link -->
             <div class="d-flex justify-content-center">
-                <p>Chưa có tài khoản? <a href="./signup.html" style="text-decoration: none; color: #007bff;">Đăng
+                <p>Chưa có tài khoản? <a href="/BT-HeThongWeb/public/auth/index.php?page=signup"
+                        style="text-decoration: none; color: #007bff;">Đăng
                         ký</a></p>
             </div>
 
