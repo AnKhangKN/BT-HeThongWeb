@@ -11,7 +11,10 @@
     />
     <link rel="stylesheet" href="../../app/views/admin/include/TrangChuAdmin.css" />
     <link rel="stylesheet" href="../../app/views/admin/assets/Hieu/ManageNhaCungCap.css">
+    <link rel="stylesheet" href="../../app/views/admin/assets/Hieu/TrangChu.css">
+    <link rel="stylesheet" href="../../app/views/admin/assets/Hieu/ThongKe.css">
     <link rel="stylesheet" href="../../app/views/admin/assets/Huy/ManageSanPham.css" />
+    
   </head>
   <body id="bodyId">
     <header>

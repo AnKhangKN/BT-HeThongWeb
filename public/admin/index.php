@@ -13,7 +13,7 @@ include_once '../../app/views/admin/include/header.php';
 if (isset($_GET['page'])) {
     $page = basename($_GET['page']);
 } else {
-    $page = 'ManageSanpham'; 
+    $page = 'TrangChu'; 
 }
 
 $pageFile = '../../app/views/admin/' . $page . '.php';
