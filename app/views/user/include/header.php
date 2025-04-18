@@ -17,7 +17,7 @@
 
 <body>
     <header id=" header">
-        <div class="topbar" style=" background-color: #ff5c39;">
+        <div class="topbar d-none d-md-block" style=" background-color: #ff5c39;">
             <div class="d-flex justify-content-between align-items-center m-auto text-white"
                 style="min-height: 30px; max-width: 1300px; font-size: 13px;">
                 <div class="m-0">UNIE VIỆT NAM - Nhà Đẹp Bếp Xinh</div>
@@ -80,6 +80,10 @@
                         <div id="modalInformationDetailNoLogin"
                             class="modalInformationDetail text-dark position-absolute d-flex">
                             <ul class="list-unstyled">
+                                <li>
+                                    <a style="text-decoration: none" class="text-dark"
+                                        href="index.php?page=information">Trang cá nhân</a>
+                                </li>
                                 <li>
                                     <a style="text-decoration: none" class="text-dark"
                                         href="/BT-HeThongWeb/public/auth/index.php?page=signup">Đăng kí</a>

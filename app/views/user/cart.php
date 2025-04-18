@@ -30,7 +30,7 @@
                                 <img src="https://via.placeholder.com/80" alt="Máy làm sữa hạt" class="img-fluid"
                                     width="80">
                             </div>
-                            <div>
+                            <div style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
                                 Máy làm sữa hạt UNIE UCB15 dung tích 1.5L, giảm ồn 30%, 10 chức năng nấu
                             </div>
                         </div>
