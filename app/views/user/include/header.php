@@ -78,7 +78,7 @@
 
                         <!-- modal information no login -->
                         <div id="modalInformationDetailNoLogin"
-                            class="modalInformationDetail text-dark position-absolute d-flex">
+                            class="modalInformationDetail text-dark end-0 position-absolute d-flex">
                             <ul class="list-unstyled">
                                 <li>
                                     <a style="text-decoration: none" class="text-dark"
