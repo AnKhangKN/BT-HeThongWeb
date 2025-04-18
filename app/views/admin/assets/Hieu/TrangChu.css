@@ -1,0 +1,49 @@
+:root {
+  --main-color: #ff5c39;
+  --white-color: #ededed;
+  --button-color: #ff451b;
+
+  --body-font: "Poppins", sans-serif;
+  --small-font-size: 0.875rem;
+}
+
+:root {
+  --z-modal: 1000;
+  --z-fixed: 100;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+}
+
+main.content {
+  padding: 20px;
+  background-color: #f8f9fa;
+  min-height: 100vh;
+}
+
+.card.card-stat {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border-left: 5px solid var(--main-color); /* Màu viền trái cho nổi bật */
+  background-color: white;
+  border-radius: 0.75rem;
+}
+
+.card.card-stat:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--main-color);
+}
+
+.card-text.display-6 {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #212529;
+}

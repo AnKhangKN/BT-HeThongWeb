@@ -1,22 +1,58 @@
 body {
-    background-color: #f8f9fa;
-  }
-  .product-card {
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    background-color: #fff;
-  }
-  .modal-header {
-    background-color: #198754;
-    color: white;
-  }
-  .modal-title {
-    font-weight: bold;
-  }
-  table img {
-    border-radius: 8px;
-  }
-  .table td, .table th {
-    vertical-align: middle;
-  }
+  background-color: #f4f6f9;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.btn-home {
+  margin-bottom: 20px;
+}
+
+h2 {
+  color: #333;
+}
+
+#search {
+  max-width: 300px;
+}
+
+.form-container {
+  background: #fff;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.product-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.table {
+  background-color: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+}
+
+.table th {
+  background-color: #e9ecef;
+}
+
+.btn {
+  border-radius: 20px;
+  transition: all 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+}
+
+#imagePreview {
+  max-width: 100px;
+  display: none;
+  border-radius: 6px;
+  margin-top: 10px;
+}

@@ -9,17 +9,22 @@
       rel="stylesheet"
       href="../../vendor/fontawesome-free-6.7.2-web/css/all.css"
     />
-    
     <link rel="stylesheet" href="../../app/views/admin/include/TrangChuAdmin.css" />
     <link rel="stylesheet" href="../../app/views/admin/assets/Hieu/ManageNhaCungCap.css">
+    <link rel="stylesheet" href="../../app/views/admin/assets/Hieu/TrangChu.css">
+    <link rel="stylesheet" href="../../app/views/admin/assets/Hieu/ThongKe.css">
     <link rel="stylesheet" href="../../app/views/admin/assets/Huy/ManageSanPham.css" />
+    <link rel="stylesheet" href="../../app/views/admin/assets/Huy/QuanLyKhachHang.css" />
+    <link rel="stylesheet" href="../../app/views/admin/assets/Huy/QuanLyDonHang.css" />
+
+    
   </head>
   <body id="bodyId">
     <header>
       <div class="l-navbar" id="navbar">
         <div class="nav">
           <div class="nav__logo__toggle__list">
-            <a href="" class="nav-logo">
+            <a href="index.php?page=TrangChu" class="nav-logo">
               <img
                 src="../../public/assets/images/Logo-removebg-preview.png"
                 src=""
@@ -32,17 +37,17 @@
               <i class="fa-solid fa-chevron-right icon-arrow"></i>
             </div>
             <ul class="nav__list">
-              <a href="#" class="nav__link">
+              <a href="index.php?page=ManageSanPham" class="nav__link">
               <i class="fa-solid fa-basket-shopping nav__icon"></i>
                 <span class="nav__text">Sản phẩm</span>
               </a>
   
-              <a href="#" class="nav__link">
+              <a href="index.php?page=QuanLyDonHang" class="nav__link">
               <i class="fa-solid fa-boxes-stacked nav__icon"></i>
                 <span class="nav__text">Đơn hàng</span>
               </a>
   
-              <a href="#" class="nav__link">
+              <a href="index.php?page=QuanLyKhachHang" class="nav__link">
               <i class="fa-solid fa-user nav__icon"></i>
                 <span class="nav__text">Khách hàng</span>
               </a>
@@ -52,7 +57,7 @@
                 <span class="nav__text">Nhà cung cấp</span>
               </a>
 
-              <a href="#" class="nav__link">
+              <a href="index.php?page=QuanLyThongKe" class="nav__link">
               <i class="fa-solid fa-chart-pie nav__icon"></i>
                 <span class="nav__text">Thống kê</span>
               </a>

@@ -1,7 +1,7 @@
 <main>
 <div class="container mt-5">
     <!-- Nút Quay về trang chủ -->
-    <a href="admin_dashboard.html" class="btn btn-primary mb-3">🏠Quay về trang chủ</a>
+    <a href="index.php?page=TrangChu" class="btn btn-primary mb-3">Quay lại</a>
 
     <h2 class="text-center">Quản lý Đơn hàng</h2>
 
