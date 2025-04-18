@@ -1,6 +1,6 @@
 <main>
 <div class="container py-4">
-  
+  <a href="index.php?page=TrangChu" class="btn btn-primary mb-3">Quay lại</a>
 
   <h2 class="text-center mb-4">Quản lý Sản phẩm</h2>
 

@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="../../app/views/admin/assets/Hieu/TrangChu.css">
     <link rel="stylesheet" href="../../app/views/admin/assets/Hieu/ThongKe.css">
     <link rel="stylesheet" href="../../app/views/admin/assets/Huy/ManageSanPham.css" />
+    <link rel="stylesheet" href="../../app/views/admin/assets/Huy/QuanLyKhachHang.css" />
+    <link rel="stylesheet" href="../../app/views/admin/assets/Huy/QuanLyDonHang.css" />
+
     
   </head>
   <body id="bodyId">
@@ -39,12 +42,12 @@
                 <span class="nav__text">Sản phẩm</span>
               </a>
   
-              <a href="#" class="nav__link">
+              <a href="index.php?page=QuanLyDonHang" class="nav__link">
               <i class="fa-solid fa-boxes-stacked nav__icon"></i>
                 <span class="nav__text">Đơn hàng</span>
               </a>
   
-              <a href="#" class="nav__link">
+              <a href="index.php?page=QuanLyKhachHang" class="nav__link">
               <i class="fa-solid fa-user nav__icon"></i>
                 <span class="nav__text">Khách hàng</span>
               </a>
